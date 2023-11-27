@@ -2,11 +2,30 @@ const axios = require("axios");
 const { readToken } = require("./auth.service");
 const fs = require("fs/promises");
 
+/**
+ * @typedef {Object} ProxyInfo
+ * @property {string} username - The username for the proxy authentication.
+ * @property {string} password - The password for the proxy authentication.
+ * @property {string} url - The URL of the proxy.
+ */
+
+/**
+ * @returns {Promise<ProxyInfo[]>} An array of objects containing proxy information.
+ */
 async function getProxies() {
   const { data } = await axios.get(
     "https://proxys.argus360.kz/proxy/formatted?package=static&country=US"
   );
-  return data;
+  const proxies = data?.map((proxy) => {
+    const [credentials, url] = proxy.split("@");
+    const [username, password] = credentials.split(":");
+    return {
+      username,
+      password,
+      url,
+    };
+  });
+  return proxies;
 }
 
 async function getUpdateStatus() {
@@ -27,16 +46,38 @@ async function getUpdateStatus() {
     password: acc.password,
     id: acc.id,
     created_by: acc.created_by,
+    email: acc.email,
   }));
   return data;
   // console.log(accounts);
 }
 
-// (async () => {
-//   console.log(await getUpdateStatus());
-// })();
+/**
+ *
+ * @param {string} email
+ */
+async function getMails(email) {
+  const parts = email.split("@");
+  const login = parts[0];
+  const domain = parts[1];
+  console.log(login, domain);
+  const { data } = await axios.get(
+    `https://www.1secmail.com/api/v1/?action=getMessages&login=${login}&domain=${domain}`
+  );
+  const mailID = data[0]?.id;
+  const { data: mail } = await axios.get(
+    `https://www.1secmail.com/api/v1//?action=readMessage&login=${login}&domain=${domain}&id=${mailID}`
+  );
+  // return data[0]?.subject.substring(Math.max(data[0].subject.length - 8, 0));
+  return mail.textBody;
+}
+
+(async () => {
+  console.log(await getMails("THnYoYfAqS@ezztt.com".toLowerCase()));
+})();
 
 module.exports = {
   getProxies,
   getUpdateStatus,
+  getMails,
 };
