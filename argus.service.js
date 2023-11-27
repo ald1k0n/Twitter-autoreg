@@ -35,3 +35,8 @@ async function getUpdateStatus() {
 // (async () => {
 //   console.log(await getUpdateStatus());
 // })();
+
+module.exports = {
+  getProxies,
+  getUpdateStatus,
+};
