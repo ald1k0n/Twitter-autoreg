@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="fix-twitter">Начать чинить твиттер</button>
+    <script>
+      const twitter = document.getElementById("fix-twitter");
+
+      twitter.addEventListener("click", async () => {
+        fetch("http://localhost:8080/twitter-fix", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((res) => alert(JSON.stringify(res, null, 2)))
+          .catch((res) => alert(JSON.stringify(res, null, 2)));
+      });
+    </script>
+  </body>
+</html>

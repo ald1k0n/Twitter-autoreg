@@ -55,8 +55,9 @@ async function getUpdateStatus() {
 /**
  *
  * @param {string} email
+ * @param {boolean} isReg
  */
-async function getMails(email) {
+async function getMails(email, isReg = false) {
   const parts = email.split("@");
   const login = parts[0];
   const domain = parts[1];
@@ -68,13 +69,22 @@ async function getMails(email) {
   const { data: mail } = await axios.get(
     `https://www.1secmail.com/api/v1//?action=readMessage&login=${login}&domain=${domain}&id=${mailID}`
   );
-  // return data[0]?.subject.substring(Math.max(data[0].subject.length - 8, 0));
-  return mail.textBody;
+  let tempCode;
+  if (!isReg) {
+    tempCode = data[0]?.subject.substring(
+      Math.max(data[0].subject.length - 8, 0)
+    );
+    if (tempCode?.includes("Windows")) {
+      return undefined;
+    }
+  } else {
+    return data[0]?.subject.substring(Math.max(data[0].subject.length - 6, 0));
+  }
 }
 
-(async () => {
-  console.log(await getMails("THnYoYfAqS@ezztt.com".toLowerCase()));
-})();
+// (async () => {
+//   console.log(await getMails("xkgweuavys@1secmail.com".toLowerCase()));
+// })();
 
 module.exports = {
   getProxies,

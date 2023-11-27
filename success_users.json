@@ -1,6 +1,48 @@
 {
+  "id": "655f18f9f5c3f50278f18655",
+  "username": "asdasdasd319138",
+  "password": "strongPASS",
+  "proxy": "50.114.85.40:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
+}
+{
+  "id": "655f18f9f5c3f50278f18655",
+  "username": "asdasdasd319138",
+  "password": "strongPASS",
+  "proxy": "166.1.9.181:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
+}
+{
+  "id": "654e1391eca47f55c5e4ee7f",
+  "username": "AftonWilli14456",
+  "password": "strongPASS",
+  "proxy": "89.116.56.224:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
+}
+{
   "id": "654e130deca47f55c5e4ee7e",
   "username": "Butterbrod81520",
   "password": "strongPASS",
-  "proxy": "50.114.105.59:50100"
+  "proxy": "216.185.48.248:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
+}
+{
+  "id": "654e12c0eca47f55c5e4ee7d",
+  "username": "ogur4ik483578",
+  "password": "strognPASS",
+  "proxy": "192.101.66.38:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
+}
+{
+  "id": "654e11a4eca47f55c5e4ee7c",
+  "username": "pe4enek21857",
+  "password": "strongPASS",
+  "proxy": "194.113.238.0:50100",
+  "proxyUsername": "proxygekko",
+  "proxyPassword": "J25UgUGSGE"
 }
