@@ -1,4 +1,4 @@
-const { run } = require("./services/twitter.service");
+const { run, createTwitter } = require("./services/twitter.service");
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -8,6 +8,11 @@ app.use(cors());
 
 app.post("/twitter-fix", async (req, res) => {
   const user = await run();
+  return res.status(200).json(user);
+});
+
+app.post("/create-twitter", async (req, res) => {
+  const user = await createTwitter();
   return res.status(200).json(user);
 });
 

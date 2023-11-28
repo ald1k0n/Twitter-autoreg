@@ -310,7 +310,8 @@ async function createTwitter() {
       console.error("Button not found");
     }
   });
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(5000);
+  await page.waitForSelector('div[role="button"]');
   await page.evaluate(() => {
     const divElements = Array.from(
       document.querySelectorAll('div[role="button"]')
@@ -326,12 +327,15 @@ async function createTwitter() {
       console.error("Button not found");
     }
   });
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
+
+  await page.waitForSelector("input[name='username']");
+
   const username = await page.evaluate(() => {
-    const usernameField = document.querySelector("input");
-    // return usernameField.value;
-    return usernameField;
+    const field = document.querySelector("input[name='username']");
+    return field.value;
   });
+
   console.log(username);
   await page.waitForTimeout(1000);
 
@@ -366,6 +370,8 @@ async function createTwitter() {
       console.error("Button not found");
     }
   });
+  await page.waitForTimeout(1500);
+
   await page.evaluate(() => {
     const divElements = Array.from(
       document.querySelectorAll('div[role="button"]')
@@ -381,6 +387,7 @@ async function createTwitter() {
       console.error("Button not found");
     }
   });
+  await page.waitForTimeout(1500);
 
   await page.evaluate(() => {
     const divElements = Array.from(
@@ -397,12 +404,35 @@ async function createTwitter() {
       console.error("Button not found");
     }
   });
+  await page.waitForTimeout(1500);
+  await page.evaluate(() => {
+    const divElements = Array.from(
+      document.querySelectorAll('div[role="button"]')
+    );
+    const targetDiv = divElements.find((div) => {
+      const spanElement = div.querySelector("span");
+      return spanElement && spanElement.textContent.trim() === "Далее";
+    });
+
+    if (targetDiv) {
+      targetDiv.click();
+    } else {
+      console.error("Button not found");
+    }
+  });
+  return {
+    username,
+    password: "strongPASS",
+    email: `${randomString}@1secmail.com`,
+    proxy: `${proxies[0].username}:${proxies[0].password}@${proxies[0].url}`,
+  };
 }
 
-(async () => {
-  await createTwitter();
-})();
+// (async () => {
+//   await createTwitter();
+// })();
 
 module.exports = {
   run,
+  createTwitter,
 };

@@ -7,16 +7,26 @@
   </head>
   <body>
     <button id="fix-twitter">Начать чинить твиттер</button>
+    <button id="create-twitter">Создать твиттер аккаунт</button>
     <script>
       const twitter = document.getElementById("fix-twitter");
-
+      const createTwitter = document.getElementById("create-twitter");
       twitter.addEventListener("click", async () => {
-        fetch("http://localhost:8080/twitter-fix", {
+        await fetch("http://localhost:8080/twitter-fix", {
           method: "POST",
         })
           .then((res) => res.json())
           .then((res) => alert(JSON.stringify(res, null, 2)))
           .catch((res) => alert(JSON.stringify(res, null, 2)));
+      });
+
+      createTwitter.addEventListener("click", async () => {
+        await fetch("http://localhost:8080/create-twitter", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((res) => alert(JSON.stringify(res, null, 2)))
+          .catch((err) => alert(JSON.stringify(err, null, 2)));
       });
     </script>
   </body>
